@@ -1,0 +1,1052 @@
+.athan-today-container {
+    background: linear-gradient(135deg, #1a5fb4 0%, #2d8ae5 100%);
+    border-radius: 15px;
+    padding: 25px;
+    color: white;
+    max-width: 600px;
+    margin: 20px auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.athan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.athan-header h2 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.next-prayer {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 8px 15px;
+    border-radius: 50px;
+    font-size: 14px;
+    backdrop-filter: blur(10px);
+}
+
+#athan-countdown {
+    font-weight: bold;
+    color: #ffd166;
+}
+
+.prayer-times-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.prayer-time-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s ease;
+}
+
+.prayer-time-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.prayer-name {
+    display: block;
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 5px;
+}
+
+.prayer-time {
+    display: block;
+    font-size: 22px;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+}
+
+.athan-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.location {
+    font-weight: 500;
+}
+
+.dates span {
+    display: block;
+    text-align: right;
+}
+
+.hijri-date {
+    color: #ffd166;
+}
+
+/* Monthly Calendar Styles */
+.athan-monthly-container {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin: 30px auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+.athan-calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.athan-calendar-table th {
+    background: #f8f9fa;
+    padding: 12px 8px;
+    text-align: center;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.athan-calendar-table td {
+    padding: 10px 8px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.athan-calendar-table tr.today {
+    background: #e3f2fd;
+}
+
+.athan-calendar-table tr:hover {
+    background: #f5f5f5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .prayer-times-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .athan-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .athan-footer {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .dates span {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .prayer-times-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .athan-calendar-table {
+        font-size: 13px;
+    }
+}
+
+/* Countries List Styles */
+.athan-countries-container {
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 40px 20px;
+}
+
+.athan-countries-header {
+    margin-bottom: 50px;
+    text-align: left;
+}
+
+.athan-countries-header h2 {
+    font-size: 42px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    color: #1a1a1a;
+}
+
+.athan-subtitle {
+    font-size: 16px;
+    color: #999;
+    margin: 0 0 25px 0;
+}
+
+.athan-search-box {
+    margin-top: 20px;
+    display: none;
+}
+
+.athan-search-box input {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 20px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.athan-search-box input:focus {
+    outline: none;
+    border-color: #1a5fb4;
+}
+
+.athan-countries-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px 40px;
+}
+
+.athan-letter-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.athan-letter-group {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 20px 0;
+    padding: 0;
+    border: none;
+}
+
+.athan-countries-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.athan-country-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    text-decoration: none;
+    color: #333;
+    background: transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    justify-content: space-between;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.athan-country-item:last-of-type {
+    border-bottom: none;
+}
+
+.athan-country-item:hover {
+    background: transparent;
+    border-color: transparent;
+    transform: none;
+    padding-left: 8px;
+}
+
+.country-flag {
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+}
+
+.country-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+}
+
+.country-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+}
+
+.country-offset {
+    font-size: 12px;
+    color: #999;
+    font-weight: 400;
+}
+
+.country-time {
+    font-size: 15px;
+    color: #999;
+    font-weight: 400;
+    min-width: 60px;
+    text-align: right;
+}
+
+
+/* Country Detail Page Styles */
+.athan-country-detail-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.athan-country-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid #eee;
+}
+
+.athan-header-left {
+    flex: 1;
+}
+
+.athan-header-left h1 {
+    font-size: 36px;
+    margin: 0 0 12px 0;
+    color: #1a1a1a;
+    font-weight: 700;
+}
+
+.athan-header-time-info {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+    font-weight: 500;
+}
+
+.athan-header-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.athan-country-flag {
+    font-size: 80px;
+    line-height: 1;
+}
+
+.athan-country-emblem {
+    font-size: 60px;
+    line-height: 1;
+}
+
+.athan-cities-section {
+    margin-top: 40px;
+}
+
+.athan-cities-title {
+    font-size: 20px;
+    color: #1a1a1a;
+    margin: 0 0 25px 0;
+    font-weight: 600;
+}
+
+.athan-cities-search {
+    margin-bottom: 25px;
+}
+
+.athan-cities-search input {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 20px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.athan-cities-search input:focus {
+    outline: none;
+    border-color: #1a5fb4;
+}
+
+.athan-cities-table-wrapper {
+    overflow-x: auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.athan-cities-prayer-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.athan-cities-prayer-table thead {
+    background: #f5f5f5;
+}
+
+.athan-cities-prayer-table th {
+    padding: 16px 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    white-space: nowrap;
+}
+
+.athan-cities-prayer-table td {
+    padding: 16px 12px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    color: #1a5fb4;
+    font-weight: 500;
+    font-family: 'Courier New', monospace;
+}
+
+.athan-cities-prayer-table .city-name-col {
+    text-align: left;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.athan-city-row:hover {
+    background: #f9f9f9;
+}
+
+.athan-back-link {
+    margin-top: 25px;
+    text-align: left;
+}
+
+.athan-back-link a {
+    color: #1a5fb4;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    transition: color 0.3s ease;
+}
+
+.athan-back-link a:hover {
+    color: #0d47a1;
+}
+
+/* Error message */
+.athan-error {
+    background: #ffebee;
+    color: #c62828;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+/* Responsive Design for Countries */
+@media (max-width: 768px) {
+    .athan-countries-header h2 {
+        font-size: 24px;
+    }
+    
+    .athan-country-detail-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .athan-header-left h1 {
+        font-size: 28px;
+    }
+    
+    .athan-header-right {
+        margin-top: 20px;
+        gap: 15px;
+    }
+    
+    .athan-country-flag {
+        font-size: 60px;
+    }
+    
+    .athan-country-emblem {
+        font-size: 45px;
+    }
+}
+
+@media (max-width: 480px) {
+    .athan-countries-header h2 {
+        font-size: 20px;
+    }
+    
+    .athan-countries-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .athan-countries-column {
+        min-width: 100%;
+    }
+    
+    .city-times-table table {
+        font-size: 11px;
+    }
+    
+    .city-times-table th,
+    .city-times-table td {
+        padding: 6px 2px;
+    }
+}
+
+/* Responsive Countries Grid */
+@media (max-width: 1200px) {
+    .athan-countries-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .athan-countries-container {
+        padding: 30px 15px;
+    }
+    
+    .athan-countries-header h2 {
+        font-size: 32px;
+    }
+    
+    .athan-countries-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .athan-countries-header h2 {
+        font-size: 24px;
+    }
+    
+    .athan-letter-group {
+        font-size: 20px;
+    }
+    
+    .country-flag {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+    
+    .country-name {
+        font-size: 14px;
+    }
+    
+    .country-offset {
+        font-size: 11px;
+    }
+    
+    .country-time {
+        font-size: 13px;
+    }
+}
+
+/* ============ City Detail Breadcrumbs ============ */
+
+.athan-breadcrumbs {
+    margin-bottom: 30px;
+    padding: 0;
+}
+
+.athan-breadcrumbs-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.athan-breadcrumb-item {
+    display: flex;
+    align-items: center;
+}
+
+.athan-breadcrumb-link {
+    color: #1a5fb4;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.athan-breadcrumb-link:hover {
+    color: #0d47a1;
+    text-decoration: underline;
+}
+
+.athan-breadcrumb-separator {
+    color: #999;
+    margin: 0 4px;
+}
+
+.athan-breadcrumb-inactive {
+    color: #666;
+    font-weight: 500;
+}
+
+/* ============ City Detail Header ============ */
+
+.athan-city-detail-header {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.athan-city-header-info {
+    flex: 1;
+}
+
+.athan-city-header-info h1 {
+    margin: 0 0 12px 0;
+    font-size: 32px;
+    font-weight: 700;
+    color: #222;
+    line-height: 1.3;
+    text-transform: capitalize;
+}
+
+.athan-city-header-subtitle {
+    margin: 0;
+    font-size: 16px;
+    color: #666;
+    font-weight: 500;
+}
+
+.athan-city-header-symbols {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.athan-city-flag-container,
+.athan-city-emblem-container {
+    position: relative;
+    width: 90px;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f5f5f5;
+    border: 1px solid #e0e0e0;
+}
+
+.athan-city-flag-img,
+.athan-city-emblem-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.athan-city-back {
+    margin-bottom: 20px;
+}
+
+.athan-city-back a {
+    color: #1a5fb4;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-block;
+    padding: 8px 12px;
+    transition: all 0.3s ease;
+}
+
+.athan-city-back a:hover {
+    color: #0d47a1;
+}
+
+/* Responsive City Detail Header */
+@media (max-width: 768px) {
+    .athan-breadcrumbs-list {
+        font-size: 12px;
+        gap: 4px;
+    }
+    
+    .athan-city-detail-header {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+    }
+    
+    .athan-city-header-info h1 {
+        font-size: 24px;
+    }
+    
+    .athan-city-header-symbols {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
+
+.athan-city-image-section {
+    width: 100%;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.city-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.athan-city-prayer-info {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.athan-today-tab {
+    display: inline-block;
+    background: #f0f4f8;
+    border: 1px solid #dde5f0;
+    padding: 8px 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+}
+
+.athan-today-label {
+    font-size: 13px;
+    color: #1a5fb4;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.athan-next-prayer {
+    font-size: 16px;
+    color: #666;
+    margin: 12px 0 20px 0;
+    font-weight: 500;
+}
+
+#athan-next-prayer-countdown {
+    font-weight: 700;
+    color: #1a5fb4;
+    font-size: 18px;
+}
+
+.athan-city-prayer-info h2 {
+    margin: 20px 0 15px 0;
+    font-size: 20px;
+    color: #333;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 12px;
+}
+
+.city-gregorian-date,
+.city-hijri-date {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+    font-weight: 500;
+}
+
+.city-prayer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.prayer-item {
+    background: linear-gradient(135deg, #f0f4f8 0%, #e8eef6 100%);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #dde5f0;
+    transition: all 0.3s ease;
+}
+
+.prayer-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(26, 95, 180, 0.2);
+    background: linear-gradient(135deg, #e8eef6 0%, #dde5f0 100%);
+}
+
+.prayer-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.prayer-item.next-prayer-highlight {
+    background: linear-gradient(135deg, #1a5fb4 0%, #2d8ae5 100%);
+    border: 2px solid #0d47a1;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(26, 95, 180, 0.4);
+}
+
+.prayer-item.next-prayer-highlight .prayer-label {
+    color: white;
+    font-weight: 700;
+}
+
+.prayer-item.next-prayer-highlight .prayer-time {
+    color: #ffd166;
+    font-size: 28px;
+}
+
+.prayer-item.next-prayer-highlight .prayer-icon {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    filter: drop-shadow(0 0 4px rgba(255, 209, 102, 0.6));
+    animation: pulse-icon 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-icon {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+.prayer-label {
+    font-size: 14px;
+    color: #555;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+.prayer-icon {
+    font-size: 24px;
+    color: #1a5fb4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(26, 95, 180, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.prayer-time {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a5fb4;
+    text-align: left;
+}
+
+/* Responsive City Detail */
+@media (max-width: 768px) {
+    .athan-city-detail-header {
+        padding: 20px;
+    }
+    
+    #athan-city-name {
+        font-size: 28px;
+    }
+    
+    .athan-city-prayer-info {
+        padding: 20px;
+    }
+    
+    .city-prayer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .prayer-item {
+        padding: 15px;
+    }
+    
+    .prayer-time {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .athan-city-detail-header {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    #athan-city-name {
+        font-size: 24px;
+    }
+    
+    .athan-city-info {
+        font-size: 14px;
+    }
+    
+    .city-prayer-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .prayer-item {
+        padding: 12px;
+    }
+    
+    .prayer-label {
+        font-size: 11px;
+    }
+    
+    .prayer-time {
+        font-size: 18px;
+    }
+}
+
+/* ============ City Monthly Calendar ============ */
+
+.athan-city-monthly {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.athan-city-monthly h2 {
+    margin: 0 0 20px 0;
+    font-size: 24px;
+    color: #1a5fb4;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 15px;
+}
+
+#athan-monthly-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.athan-city-monthly-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.athan-city-monthly-table thead {
+    background: linear-gradient(135deg, #1a5fb4 0%, #2d8ae5 100%);
+    color: white;
+    position: sticky;
+    top: 0;
+}
+
+.athan-city-monthly-table th {
+    padding: 12px 8px;
+    text-align: center;
+    font-weight: 600;
+    border: 1px solid #0d47a1;
+}
+
+.athan-city-monthly-table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s ease;
+}
+
+.athan-city-monthly-table tbody tr:hover {
+    background-color: #f5f8fc;
+}
+
+.athan-city-monthly-table tbody tr:nth-child(even) {
+    background-color: #fafbfc;
+}
+
+.athan-city-monthly-table tbody tr.athan-today-row {
+    background: linear-gradient(135deg, #1a5fb4 0%, #2d8ae5 100%);
+    color: white;
+    font-weight: 500;
+}
+
+.athan-city-monthly-table tbody tr.athan-today-row td {
+    border-color: #0d47a1;
+    color: white;
+}
+
+.athan-city-monthly-table tbody tr.athan-today-row:hover {
+    background: linear-gradient(135deg, #0d47a1 0%, #1a5fb4 100%);
+}
+
+.athan-city-monthly-table td {
+    padding: 10px 8px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    font-weight: bold;
+}
+
+.athan-city-monthly-table td.loading,
+.athan-city-monthly-table td.error {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 20px;
+}
+
+.athan-city-monthly-table td.error {
+    color: #d32f2f;
+    font-weight: 500;
+}
+
+/* Responsive Monthly Table */
+@media (max-width: 768px) {
+    .athan-city-monthly {
+        padding: 20px;
+    }
+    
+    .athan-city-monthly h2 {
+        font-size: 20px;
+    }
+    
+    .athan-city-monthly-table {
+        font-size: 12px;
+    }
+    
+    .athan-city-monthly-table th,
+    .athan-city-monthly-table td {
+        padding: 8px 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .athan-city-monthly {
+        padding: 15px;
+        margin-top: 20px;
+    }
+    
+    .athan-city-monthly h2 {
+        font-size: 18px;
+    }
+    
+    .athan-city-monthly-table {
+        font-size: 10px;
+    }
+    
+    .athan-city-monthly-table th,
+    .athan-city-monthly-table td {
+        padding: 6px 2px;
+    }
+}
