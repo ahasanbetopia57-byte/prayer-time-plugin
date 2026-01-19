@@ -223,31 +223,36 @@
     font-size: 24px;
     font-weight: 700;
     color: #1a1a1a;
-    margin: 0 0 20px 0;
+    margin: 0 0 12px 0;
     padding: 0;
     border: none;
+    text-align: left;
 }
 
 .athan-countries-list {
     display: flex;
     flex-direction: column;
     gap: 0;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    overflow: hidden;
 }
 
 .athan-country-item {
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 12px 0;
+    padding: 10px 12px;
     text-decoration: none;
     color: #333;
     background: transparent;
-    transition: all 0.3s ease;
+    transition: background-color 0.2s ease;
     cursor: pointer;
     border: none;
     position: relative;
     justify-content: space-between;
-    border-bottom: 1px solid #f5f5f5;
+    border-bottom: 1px solid #f3f4f6;
+    outline: none;
 }
 
 .athan-country-item:last-of-type {
@@ -255,21 +260,26 @@
 }
 
 .athan-country-item:hover {
-    background: transparent;
+    background: #f9fafb;
     border-color: transparent;
     transform: none;
-    padding-left: 8px;
+    padding-left: 12px;
+}
+
+.athan-country-item:focus {
+    outline: none;
+    border-bottom: 1px solid #f3f4f6;
 }
 
 .country-flag {
     display: inline-flex;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background: #f0f0f0;
+    background: transparent;
     align-items: center;
     justify-content: center;
-    font-size: 26px;
+    font-size: 40px;
     flex-shrink: 0;
 }
 
@@ -284,7 +294,7 @@
 .country-name {
     font-size: 15px;
     font-weight: 500;
-    color: #333;
+    color: #000000;
 }
 
 .country-offset {
@@ -295,7 +305,7 @@
 
 .country-time {
     font-size: 15px;
-    color: #999;
+    color: #000000;
     font-weight: 400;
     min-width: 60px;
     text-align: right;
@@ -385,47 +395,102 @@
 .athan-cities-table-wrapper {
     overflow-x: auto;
     background: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
     margin-bottom: 30px;
+    box-shadow: none;
 }
 
 .athan-cities-prayer-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .athan-cities-prayer-table thead {
-    background: #f5f5f5;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .athan-cities-prayer-table th {
-    padding: 16px 12px;
-    text-align: left;
+    padding: 16px;
+    text-align: center;
     font-weight: 600;
-    color: #333;
-    border-bottom: 2px solid #ddd;
+    color: #6b7280;
     white-space: nowrap;
+    font-size: 14px;
+}
+
+.athan-cities-prayer-table th:first-child {
+    text-align: left;
+    padding-left: 20px;
+    background: #f3f4f6;
 }
 
 .athan-cities-prayer-table td {
-    padding: 16px 12px;
+    padding: 14px 16px;
     text-align: center;
-    border-bottom: 1px solid #eee;
-    color: #1a5fb4;
+    border-bottom: 1px solid #f3f4f6;
+    color: #1f2937;
     font-weight: 500;
-    font-family: 'Courier New', monospace;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: white;
 }
 
-.athan-cities-prayer-table .city-name-col {
+.athan-cities-prayer-table td:first-child {
     text-align: left;
-    color: #1a1a1a;
+    padding-left: 20px;
+    background: #f9fafb;
     font-weight: 600;
 }
 
+.athan-cities-prayer-table .city-name-col {
+    color: #111827;
+    font-weight: 600;
+    font-family: inherit;
+}
+
+.athan-city-row {
+    transition: none;
+}
+
 .athan-city-row:hover {
-    background: #f9f9f9;
+    background: white;
+}
+
+.athan-city-row:hover td {
+    color: #111827;
+    background: #f9fafb;
+}
+
+.athan-city-row:hover td:first-child {
+    background: #f3f4f6;
+}
+
+.athan-city-row:nth-child(even) {
+    background: transparent;
+}
+
+.athan-city-row:nth-child(even):hover {
+    background: transparent;
+}
+
+.athan-city-link {
+    color: #111827;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+    display: inline-block;
+    outline: none;
+}
+
+.athan-city-link:hover {
+    color: #1a5fb4;
+}
+
+.athan-city-link:focus {
+    outline: none;
+    box-shadow: none;
 }
 
 .athan-back-link {
@@ -543,7 +608,7 @@
     .country-flag {
         width: 40px;
         height: 40px;
-        font-size: 20px;
+        font-size: 35px;
     }
     
     .country-name {
@@ -605,6 +670,13 @@
 }
 
 /* ============ City Detail Header ============ */
+
+
+.athan-city-detail-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+}
 
 .athan-city-detail-header {
     background: white;
@@ -1048,5 +1120,162 @@
     .athan-city-monthly-table th,
     .athan-city-monthly-table td {
         padding: 6px 2px;
+    }
+}
+
+/* ============ Organized Cities Styles ============ */
+
+.athan-cities-organized {
+    margin-top: 40px;
+    border-radius: 12px;
+}
+
+.athan-cities-organized .athan-cities-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.athan-cities-search-organized {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.athan-cities-search-organized input,
+.athan-cities-search input {
+    width: 80%;
+    padding: 12px 16px 12px 40px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: white;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3e%3ccircle cx='11' cy='11' r='8'%3e%3c/circle%3e%3cpath d='m21 21-4.35-4.35'%3e%3c/path%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 20px;
+    padding-left: 40px;
+}
+
+.athan-cities-search-organized input:focus,
+.athan-cities-search input:focus {
+    outline: none;
+    border-color: #1a5fb4;
+    box-shadow: 0 0 0 3px rgba(26, 95, 180, 0.1);
+}
+
+.athan-cities-list-alphabetical {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.athan-letter-group {
+    background: transparent;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    transition: none;
+}
+
+.athan-letter-group:hover {
+    box-shadow: none;
+    transform: none;
+}
+
+.athan-letter-header {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a5fb4;
+    margin: 0 0 16px 0;
+    padding: 0;
+    border-bottom: 2px solid #e8f0fe;
+    padding-bottom: 12px;
+}
+
+.athan-cities-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.athan-city-link-organized {
+    padding: 10px 12px;
+    text-decoration: none;
+    color: #333;
+    background: transparent;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 15px;
+    border-left: 3px solid transparent;
+    display: block;
+    cursor: pointer;
+}
+
+.athan-city-link-organized:hover {
+    background: #f0f7ff;
+    color: #1a5fb4;
+    border-left-color: #1a5fb4;
+    padding-left: 16px;
+}
+
+.athan-city-link-organized:active {
+    background: #e8f0fe;
+}
+
+/* Responsive Organized Cities */
+@media (max-width: 768px) {
+    .athan-cities-organized {
+        padding: 20px;
+        margin-top: 30px;
+    }
+    
+    .athan-cities-organized .athan-cities-title {
+        font-size: 20px;
+    }
+    
+    .athan-cities-list-alphabetical {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    }
+    
+    .athan-letter-group {
+        padding: 15px;
+    }
+    
+    .athan-letter-header {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .athan-cities-organized {
+        padding: 15px;
+        margin-top: 20px;
+    }
+    
+    .athan-cities-organized .athan-cities-title {
+        font-size: 18px;
+    }
+    
+    .athan-cities-list-alphabetical {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .athan-letter-group {
+        padding: 12px;
+    }
+    
+    .athan-letter-header {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+    
+    .athan-city-link-organized {
+        padding: 8px 10px;
+        font-size: 14px;
     }
 }

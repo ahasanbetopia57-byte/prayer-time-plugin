@@ -5,6 +5,12 @@
  * Version: 1.0.0
  */
 
+// Include Shortcodes
+require_once plugin_dir_path(__FILE__) . 'hijri-date-shortcode.php';
+// require_once plugin_dir_path(__FILE__) . 'prayer-times-ui.php';
+require_once plugin_dir_path(__FILE__) . 'date-conversion.php';
+require_once plugin_dir_path(__FILE__) . 'city-location-prayer.php';
+
 // Main Prayer Times Class
 class AthanProPrayerTimes {
     private $api_base = 'https://api.aladhan.com/v1';
@@ -268,8 +274,9 @@ class AthanProPrayerTimes {
                             <?php foreach ($countries as $country):
                                 $offset = isset($country['offset']) ? $country['offset'] : '+00:00';
                                 $capital = isset($country['capital']) ? $country['capital'] : '';
+                                $countryUrl = home_url('/countries-detail/') . '?country=' . esc_attr($country['code']) . '&country_name=' . urlencode($country['name']);
                             ?>
-                                <a href="#" class="athan-country-item" data-country="<?php echo esc_attr($country['code']); ?>" data-country-name="<?php echo esc_attr($country['name']); ?>" data-capital="<?php echo esc_attr($capital); ?>">
+                                <a href="<?php echo esc_url($countryUrl); ?>" class="athan-country-item" data-country="<?php echo esc_attr($country['code']); ?>" data-country-name="<?php echo esc_attr($country['name']); ?>" data-capital="<?php echo esc_attr($capital); ?>">
                                     <span class="country-flag" id="flag-<?php echo esc_attr($country['code']); ?>">🌍</span>
                                     <div class="country-info">
                                         <span class="country-name"><?php echo esc_html($country['name']); ?></span>
@@ -326,6 +333,22 @@ class AthanProPrayerTimes {
         ob_start();
         ?>
         <div class="athan-country-detail-container">
+            <nav class="athan-breadcrumbs">
+                <ol class="athan-breadcrumbs-list">
+                    <li class="athan-breadcrumb-item">
+                        <a href="<?php echo esc_url(home_url('/')); ?>" class="athan-breadcrumb-link">Home</a>
+                    </li>
+                    <li aria-hidden="true" class="athan-breadcrumb-separator">/</li>
+                    <li class="athan-breadcrumb-item">
+                        <a href="<?php echo esc_url(home_url('/countries')); ?>" class="athan-breadcrumb-link">Countries</a>
+                    </li>
+                    <li aria-hidden="true" class="athan-breadcrumb-separator">/</li>
+                    <li class="athan-breadcrumb-item">
+                        <span class="athan-breadcrumb-inactive"><?php echo esc_html($country_info['name']); ?></span>
+                    </li>
+                </ol>
+            </nav>
+            
             <div class="athan-country-detail-header">
                 <div class="athan-header-left">
                     <h1 id="athan-detail-country-name">Prayer Times In <?php echo esc_html($country_info['name']); ?></h1>
@@ -335,16 +358,11 @@ class AthanProPrayerTimes {
                 </div>
                 <div class="athan-header-right">
                     <div class="athan-country-flag" id="country-flag">🌍</div>
-                    <div class="athan-country-emblem" id="country-emblem">🛡️</div>
                 </div>
             </div>
             
             <div class="athan-cities-section">
                 <h2 class="athan-cities-title">Payer Times For Cities In <?php echo esc_html($country_info['name']); ?></h2>
-                
-                <div class="athan-cities-search">
-                    <input type="text" id="athan-cities-search" placeholder="Search cities..." />
-                </div>
                 
                 <div class="athan-cities-table-wrapper">
                     <table class="athan-cities-prayer-table">
@@ -360,9 +378,11 @@ class AthanProPrayerTimes {
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($country_info['cities'] as $city): ?>
+                            <?php foreach ($country_info['cities'] as $city): 
+                                $cityUrl = home_url('/city-detail/') . '?city=' . urlencode($city) . '&country=' . urlencode($country_info['name']) . '&country_code=' . $country_code;
+                            ?>
                             <tr class="athan-city-row" data-city="<?php echo esc_attr($city); ?>">
-                                <td class="city-name-col"><a href="#" class="athan-city-link" data-city="<?php echo esc_attr($city); ?>" data-country="<?php echo esc_attr($country_info['name']); ?>" data-country-code="<?php echo esc_attr($country_code); ?>"><?php echo esc_html($city); ?></a></td>
+                                <td class="city-name-col"><a href="<?php echo esc_url($cityUrl); ?>" class="athan-city-link" data-city="<?php echo esc_attr($city); ?>" data-country="<?php echo esc_attr($country_info['name']); ?>" data-country-code="<?php echo esc_attr($country_code); ?>"><?php echo esc_html($city); ?></a></td>
                                 <td class="fajr">--:--</td>
                                 <td class="sunrise">--:--</td>
                                 <td class="dhuhr">--:--</td>
@@ -375,8 +395,48 @@ class AthanProPrayerTimes {
                     </table>
                 </div>
                 
-                <div class="athan-back-link">
-                    <a href="<?php echo esc_url(home_url('/countries/')); ?>" id="athan-back-to-countries">&larr; Back to Countries</a>
+                <div class="athan-cities-organized">
+                    <h2 class="athan-cities-title">Prayer Times Of Others Cities In <?php echo esc_html($country_info['name']); ?></h2>
+        <div class="athan-cities-search-organized">
+                        <input type="text" id="athan-cities-search-organized-detail" placeholder="Search cities..." />
+                    </div>
+                    
+                    <div class="athan-cities-list-alphabetical">
+                        <?php 
+                        // Sort cities alphabetically
+                        $cities = $country_info['cities'];
+                        sort($cities);
+                        
+                        // Group cities by first letter
+                        $grouped_cities = [];
+                        foreach ($cities as $city) {
+                            $first_letter = strtoupper(substr($city, 0, 1));
+                            if (!isset($grouped_cities[$first_letter])) {
+                                $grouped_cities[$first_letter] = [];
+                            }
+                            $grouped_cities[$first_letter][] = $city;
+                        }
+                        
+                        // Sort by letter
+                        ksort($grouped_cities);
+                        
+                        // Render each letter group
+                        foreach ($grouped_cities as $letter => $cities_list): 
+                        ?>
+                            <div class="athan-letter-group">
+                                <h3 class="athan-letter-header"><?php echo esc_html($letter); ?></h3>
+                                <div class="athan-cities-items">
+                                    <?php foreach ($cities_list as $city): 
+                                        $orgCityUrl = home_url('/city-detail/') . '?city=' . urlencode($city) . '&country=' . urlencode($country_info['name']) . '&country_code=' . $country_code;
+                                    ?>
+                                        <a href="<?php echo esc_url($orgCityUrl); ?>" class="athan-city-link-organized" data-city="<?php echo esc_attr($city); ?>" data-country="<?php echo esc_attr($country_info['name']); ?>" data-country-code="<?php echo esc_attr($country_code); ?>">
+                                            <?php echo esc_html($city); ?>
+                                        </a>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -495,11 +555,10 @@ class AthanProPrayerTimes {
                 </div>
                 <div class="athan-city-header-symbols">
                     <div class="athan-city-flag-container">
-                        <img id="athan-city-flag-img" src="" alt="<?php echo esc_html($country); ?> flag" class="athan-city-flag-img" />
+                        
+                        <img id="athan-city-flag-img" src="https://flagcdn.com/w320/<?php echo strtolower(esc_attr($country_code)); ?>.png" alt="<?php echo esc_html($country); ?> flag" class="athan-city-flag-img" />
                     </div>
-                    <div class="athan-city-emblem-container">
-                        <img id="athan-city-emblem-img" src="" alt="<?php echo esc_html($country); ?> emblem" class="athan-city-emblem-img" />
-                    </div>
+                    
                 </div>
             </div>
             
@@ -567,7 +626,7 @@ class AthanProPrayerTimes {
                         <thead>
                             <tr>
                                 <th><?php echo date('F'); ?></th>
-                                <th>Hijri</th>
+                                <th><span id="athan-hijri-month-name">Hijri</span></th>
                                 <th>Fajr</th>
                                 <th>Sunrise</th>
                                 <th>Dhuhr</th>
@@ -582,6 +641,68 @@ class AthanProPrayerTimes {
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                
+                
+                <div class="athan-cities-organized">
+                    <h2 class="athan-cities-title">Prayer Times Of Others Cities In <?php echo esc_html($country); ?></h2>
+                    
+                    <div class="athan-cities-search-organized">
+                        <input type="text" id="athan-cities-search-organized-detail" placeholder="Search cities..." />
+                    </div>
+                    
+                    <div class="athan-cities-list-alphabetical">
+                        <?php 
+                        // Get all cities for this country
+                        $city_country_info = null;
+                        foreach ($countries_data['countries'] as $c) {
+                            if ($c['name'] === $country) {
+                                $city_country_info = $c;
+                                break;
+                            }
+                        }
+                        
+                        if ($city_country_info && isset($city_country_info['cities'])) {
+                            // Sort cities alphabetically
+                            $cities = $city_country_info['cities'];
+                            sort($cities);
+                            
+                            // Group cities by first letter
+                            $grouped_cities = [];
+                            foreach ($cities as $city_name) {
+                                // Skip the current city
+                                if ($city_name === $city) {
+                                    continue;
+                                }
+                                $first_letter = strtoupper(substr($city_name, 0, 1));
+                                if (!isset($grouped_cities[$first_letter])) {
+                                    $grouped_cities[$first_letter] = [];
+                                }
+                                $grouped_cities[$first_letter][] = $city_name;
+                            }
+                            
+                            // Sort by letter
+                            ksort($grouped_cities);
+                            
+                            // Render each letter group
+                            foreach ($grouped_cities as $letter => $cities_list): 
+                            ?>
+                                <div class="athan-letter-group" data-letter="<?php echo esc_attr($letter); ?>">
+                                    <h3 class="athan-letter-header"><?php echo esc_html($letter); ?></h3>
+                                    <div class="athan-cities-items">
+                                        <?php foreach ($cities_list as $city_name): 
+                                            $cityDetailUrl = home_url('/city-detail/') . '?city=' . urlencode($city_name) . '&country=' . urlencode($country) . '&country_code=' . $country_code;
+                                        ?>
+                                            <a href="<?php echo esc_url($cityDetailUrl); ?>" class="athan-city-link-organized" data-city="<?php echo esc_attr($city_name); ?>" data-country="<?php echo esc_attr($country); ?>" data-country-code="<?php echo esc_attr($country_code); ?>">
+                                                <?php echo esc_html($city_name); ?>
+                                            </a>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            <?php endforeach;
+                        }
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>

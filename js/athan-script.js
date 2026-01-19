@@ -32,6 +32,19 @@ jQuery(document).ready(function($) {
         window.location.href = url;
     });
     
+    // ============ Organized City Link Click Handler ============
+    $(document).on('click', '.athan-city-link-organized', function(e) {
+        e.preventDefault();
+        const city = $(this).data('city');
+        const country = $(this).data('country');
+        const countryCode = $(this).data('country-code');
+        
+        // Navigate to city detail page
+        const baseUrl = (typeof athanData !== 'undefined' && athanData.cityDetailUrl) ? athanData.cityDetailUrl : '/city-detail/';
+        const url = `${baseUrl}?city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&country_code=${countryCode}`;
+        window.location.href = url;
+    });
+    
     function updateNextPrayerCountdown() {
         const times = athanData.times;
         const now = new Date();
@@ -270,15 +283,6 @@ jQuery(document).ready(function($) {
             e.preventDefault();
             const countriesUrl = (typeof athanData !== 'undefined' && athanData.countriesUrl) ? athanData.countriesUrl : '/countries/';
             window.location.href = countriesUrl;
-        });
-        
-        // Cities search functionality
-        $('#athan-cities-search').on('keyup', function() {
-            const searchTerm = $(this).val().toLowerCase();
-            $('.athan-city-row').each(function() {
-                const cityName = $(this).find('.city-name-col').text().toLowerCase();
-                $(this).toggle(cityName.includes(searchTerm));
-            });
         });
     }
     
@@ -618,5 +622,72 @@ jQuery(document).ready(function($) {
         // Set city image (using city name in placeholder)
         const imageUrl = `https://via.placeholder.com/800x400?text=${encodeURIComponent(city + ', ' + country)}`;
         $('#athan-city-image').attr('src', imageUrl);
+        
+        // Handle organized cities search
+        $('#athan-cities-search-organized-detail').on('keyup', function() {
+            const searchTerm = $(this).val().toLowerCase();
+            
+            if (!searchTerm) {
+                // Show all groups
+                $('.athan-letter-group').show();
+                return;
+            }
+            
+            // Hide all groups initially
+            $('.athan-letter-group').hide();
+            
+            // Show groups that have matching cities
+            $('.athan-letter-group').each(function() {
+                let hasMatch = false;
+                $(this).find('.athan-city-link-organized').each(function() {
+                    const cityName = $(this).text().toLowerCase();
+                    if (cityName.includes(searchTerm)) {
+                        $(this).show();
+                        hasMatch = true;
+                    } else {
+                        $(this).hide();
+                    }
+                });
+                
+                // Show group if it has matching cities
+                if (hasMatch) {
+                    $(this).show();
+                }
+            });
+        });
     }
+    
+    // Handle search in country detail page for organized cities
+    $(document).on('keyup', '#athan-cities-search-organized-detail', function() {
+        const searchTerm = $(this).val().toLowerCase();
+        
+        if (!searchTerm) {
+            // Show all groups and all city links
+            $('.athan-cities-organized .athan-letter-group').show();
+            $('.athan-cities-organized .athan-city-link-organized').show();
+            return;
+        }
+        
+        // Hide all groups initially
+        $('.athan-cities-organized .athan-letter-group').hide();
+        
+        // Show groups that have matching cities
+        $('.athan-cities-organized .athan-letter-group').each(function() {
+            let hasMatch = false;
+            $(this).find('.athan-city-link-organized').each(function() {
+                const cityName = $(this).text().toLowerCase();
+                if (cityName.includes(searchTerm)) {
+                    $(this).show();
+                    hasMatch = true;
+                } else {
+                    $(this).hide();
+                }
+            });
+            
+            // Show group if it has matching cities
+            if (hasMatch) {
+                $(this).show();
+            }
+        });
+    });
 });
